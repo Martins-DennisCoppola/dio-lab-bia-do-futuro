@@ -1,11 +1,11 @@
 data,descricao,categoria,valor,tipo
-2025-10-01,Salário,receita,5000.00,entrada
-2025-10-02,Aluguel,moradia,1200.00,saida
-2025-10-03,Supermercado,alimentacao,450.00,saida
-2025-10-05,Netflix,lazer,55.90,saida
-2025-10-07,Farmácia,saude,89.00,saida
-2025-10-10,Restaurante,alimentacao,120.00,saida
-2025-10-12,Uber,transporte,45.00,saida
-2025-10-15,Conta de Luz,moradia,180.00,saida
-2025-10-20,Academia,saude,99.00,saida
-2025-10-25,Combustível,transporte,250.00,saida
+2026-03-01,Salário Mensal,receita,5000.00,entrada
+2026-03-02,Aluguel e Condomínio,moradia,1500.00,saida
+2026-03-03,Supermercado Guanabara,alimentacao,600.00,saida
+2026-03-04,Aporte Meta 10% (Tesouro),investimento,350.00,saida
+2026-03-05,Netflix e Spotify,lazer,75.00,saida
+2026-03-10,Droga Raia,saude,45.00,saida
+2026-03-12,Uber p/ Trabalho,transporte,120.00,saida
+2026-03-15,Light SESA,moradia,220.00,saida
+2026-03-18,Restaurante OutBack,lazer,180.00,saida
+2026-03-20,Posto Shell,transporte,200.00,saida
