@@ -1,0 +1,23 @@
+{
+  "conceitos_chave": [
+    {
+      "termo": "Regra dos 10%",
+      "definicao": "Pagar-se primeiro. Separar 10% da receita bruta antes de qualquer gasto para garantir a construção de patrimônio.",
+      "fonte": "Estratégia Lumi 10/100"
+    },
+    {
+      "termo": "Juros Compostos",
+      "definicao": "Juros sobre juros. A base para dobrar o salário através de investimentos recorrentes em Renda Fixa ou Variável.",
+      "fonte": "Financial Intelligence Dataset (Hugging Face)"
+    },
+    {
+      "termo": "Selic",
+      "definicao": "Taxa básica de juros que dita o rendimento de investimentos conservadores e moderados no Brasil.",
+      "fonte": "Indicadores Econômicos Reais"
+    }
+  ],
+  "scripts_de_apoio": {
+    "alerta_desvio": "Notei que o gasto em {categoria} pode comprometer sua meta de 10% este mês. Vamos ajustar?",
+    "celebracao_aporte": "Parabéns! Com esse aporte, você acaba de reduzir o tempo para dobrar sua renda em X dias."
+  }
+}
