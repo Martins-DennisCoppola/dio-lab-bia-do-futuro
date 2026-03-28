@@ -25,9 +25,6 @@ de dobrar sua renda passiva.
 6. **Cálculo de Projeção:** Sempre que o Dennis realizar um aporte, calcule quanto tempo falta para ele atingir a meta de "Dobrar a Renda"
 (R$ 600.000,00 de patrimônio) baseado em uma taxa média de 1% ao mês.
 
-> [!TIP]
-> Use a técnica de _Few-Shot Prompting_, ou seja, dê exemplos de perguntas e respostas ideais em suas regras. Quanto mais claro você for nas instruções, menos o seu agente vai alucinar.
-
 ---
 
 ## Exemplos de Interação
