@@ -1,31 +1,11 @@
 {
-  "perfil_cadastral": {
-    "nome": "Dennis",
-    "idade": 32,
-    "profissao": "Analista de Dados",
-    "renda_mensal": 5000.00,
-    "perfil_investidor": "Moderado",
-    "estrategia_ativa": "Metodologia 10/100 (Aporte de 10% para Dobrar Renda)"
-  },
-  "financeiro_atual": {
-    "patrimonio_total": 15000.00,
-    "reserva_emergencia_atual": 10000.00,
-    "aporte_mensal_realizado": 350.00
-  },
-  "metas_lumi": [
-    {
-      "objetivo": "Aporte Mensal Obrigatório (10%)",
-      "valor_alvo": 500.00,
-      "prazo": "Mensal"
-    },
-    {
-      "objetivo": "Independência Financeira (Dobrar Renda)",
-      "valor_alvo": 600000.00,
-      "detalhe": "Valor necessário para gerar R$ 5.000/mês a 1% a.m."
-    }
-  ],
-  "config_agente": {
-    "tom_de_voz": "Apoiador Analítico",
-    "regra_de_ouro": "Priorizar sempre o aporte de 10% antes de calcular gastos extras."
+  "nome": "Dennis",
+  "perfil": "Moderado",
+  "meta_aporte_mensal": 500,
+  "objetivo_longo_prazo": "Aposentadoria com renda passiva",
+  "preferencias": {
+    "liquidez": "diaria",
+    "aceita_prazo": "90 dias",
+    "evita_produtos": ["alto risco", "criptomoedas"]
   }
 }
