@@ -1,23 +1,22 @@
 {
-  "conceitos_chave": [
-    {
-      "termo": "Regra dos 10%",
-      "definicao": "Pagar-se primeiro. Separar 10% da receita bruta antes de qualquer gasto para garantir a construção de patrimônio.",
-      "fonte": "Estratégia Lumi 10/100"
-    },
-    {
-      "termo": "Juros Compostos",
-      "definicao": "Juros sobre juros. A base para dobrar o salário através de investimentos recorrentes em Renda Fixa ou Variável.",
-      "fonte": "Financial Intelligence Dataset (Hugging Face)"
-    },
-    {
-      "termo": "Selic",
-      "definicao": "Taxa básica de juros que dita o rendimento de investimentos conservadores e moderados no Brasil.",
-      "fonte": "Indicadores Econômicos Reais"
-    }
-  ],
-  "scripts_de_apoio": {
-    "alerta_desvio": "Notei que o gasto em {categoria} pode comprometer sua meta de 10% este mês. Vamos ajustar?",
-    "celebracao_aporte": "Parabéns! Com esse aporte, você acaba de reduzir o tempo para dobrar sua renda em X dias."
+  "selic": {
+    "definicao": "Taxa básica de juros da economia brasileira.",
+    "exemplo": "Com Selic a 10% ao ano, um investimento de R$ 1.000 rende cerca de R$ 100 em 12 meses."
+  },
+  "juros_compostos": {
+    "definicao": "Juros sobre juros, aumentando o rendimento ao longo do tempo.",
+    "exemplo": "Investindo R$ 500 a 1% ao mês, em 12 meses você terá R$ 566,97."
+  },
+  "cdi": {
+    "definicao": "Taxa usada como referência para investimentos de renda fixa.",
+    "exemplo": "Um CDB de 102% do CDI rende mais que a poupança."
+  },
+  "liquidez": {
+    "definicao": "Capacidade de transformar um ativo em dinheiro rapidamente.",
+    "exemplo": "Tesouro Selic possui liquidez diária, ou seja, pode ser resgatado a qualquer momento."
+  },
+  "diversificacao": {
+    "definicao": "Estratégia de distribuir investimentos em diferentes ativos para reduzir riscos.",
+    "exemplo": "Combinar Tesouro Selic com CDBs e Fundos de Índice aumenta a segurança da carteira."
   }
 }
