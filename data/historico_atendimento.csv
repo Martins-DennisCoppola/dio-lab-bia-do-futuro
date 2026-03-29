@@ -1,6 +1,6 @@
-data,canal,tema,resumo,resolvido
-2026-03-01,chat,Estratégia 10/100,Explicação sobre como separar os primeiros 10% do salário,sim
-2026-03-05,chat,Aporte Mensal,Registro de aporte parcial de R$ 200 no Tesouro Selic,sim
-2026-03-12,chat,Análise de Gastos,Identificado desvio de 15% em Lazer que afeta a meta mensal,sim
-2026-03-20,chat,Independência Financeira,Cálculo de projeção para dobrar a renda em 120 meses,sim
-2026-03-25,chat,Aporte Mensal,Depósito final de R$ 300. Meta de 10% batida com sucesso!,sim
+data,interacao,resposta,sentimento
+2026-02-15,"Posso gastar R$200 em lazer?","Recomendo priorizar aporte de 10%.","neutro"
+2026-02-20,"Completei o aporte de R$500.","Parabéns, você atingiu sua meta!","positivo"
+2026-02-25,"Quero investir em Bitcoin.","Não recomendado para perfil moderado.","negativo"
+2026-03-01,"Não consegui completar o aporte este mês.","Sugiro ajustar gastos de lazer para priorizar o aporte.","neutro"
+2026-03-05,"Quanto falta para minha meta?","Faltam R$150 para completar os R$500.","positivo"
