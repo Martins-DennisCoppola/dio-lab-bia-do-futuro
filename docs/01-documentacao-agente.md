@@ -3,13 +3,13 @@
 ## Caso de Uso
 
 ### Problema
-> Usuários frequentemente perdem o controle de gastos por impulso e deixam de construir um patrimônio por falta de metas claras ou por acreditarem que investimentos seguros são complexos, utilizando toda sua receito do mês ou mantendo uma parte do seu capital em opções de baixa rentabilidade, como a poupança, ou parado mesmo na conta corrente
+> Usuários frequentemente perdem o controle de gastos por impulso e deixam de construir um patrimônio por falta de metas claras ou por acreditarem que investimentos seguros são complexos, utilizando toda sua receito do mês ou mantendo uma parte do seu capital em opções de baixa rentabilidade, como a poupança, ou parado mesmo na conta corrente.
 
 ### Solução
-> O agente atua como um Guardião de Patrimônio, monitorando tetos de gastos por categoria e incentivando o aporte mensal de 10% do orçamento em ativos de renda fixa (mesma segurança da poupança, com maior rentabilidade). O objetivo final é educar o usuário para que o rendimento de seus juros, a longo prazo, se iguale ao seu salário atual, dobrando sua receita mensal através de dados e disciplina.
+> O agente atua como um apoio e educador financeiro, monitorando tetos de gastos por categoria e incentivando o aporte mensal de 10% do orçamento em ativos de renda fixa (mesma segurança da poupança, com maior rentabilidade). O objetivo final é educar o usuário para que o rendimento de seus juros, a longo prazo, aproximadamente 240 meses, o rendimento do juros se iguale ao seu salário atual, dobrando sua receita mensal com o apoio do agente e disciplina.
 
 ### Público-Alvo
-> Profissionais que buscam independência financeira e um auxilio de controle sobre seus gastos e investimentos.
+> Profissionais que buscam independência financeira de longo prazo, um auxilio de controle sobre seus gastos mensais e investimento de baixa complexidade e risco.
 
 ---
 
@@ -25,8 +25,8 @@ no objetivo de longo prazo (viver de renda). Ele é analítico como um cientista
 
 ### Tom de Comunicação
 > **Acessível, Transparente e Seguro.**
-Explica conceitos complexos (como juros compostos ou Selic) de forma simples. É direto ao emitir alertas de gastos, mas sempre oferece
-uma alternativa positiva para o dinheiro.
+Explica conceitos que podem ser complexos (como juros compostos ou Selic) de forma simples. É direto ao emitir alertas de gastos, mas sempre oferece
+uma alternativa simpática e positiva para o uso do dinheiro.
 
 ### Exemplos de Linguagem
 - Saudação: "Olá! Vamos conferir como está o caminho para a sua independência financeira hoje? Já garantiu seu aporte de 10%?"
@@ -41,7 +41,7 @@ uma alternativa positiva para o dinheiro.
 
 ```mermaid
 flowchart TD
-    A[Cliente] -->|Mensagem| B[Interface]
+    A[Usuário] -->|Mensagem| B[Interface]
     B --> C[LLM]
     C --> D[Base de Conhecimento]
     D --> C
@@ -53,9 +53,9 @@ flowchart TD
 
 | Componente | Descrição |
 |------------|-----------|
-| Interface | Interface de chat (via console Python ou Streamlit) focada em clareza e experiência do usuário (UX). |
-| LLM / Agente de IA | Modelo de Linguagem Generativa configurado com a persona do apoiador financeiro Lumi. |
-| Base de Conhecimento | Arquivos JSON/CSV estruturados contendo histórico de transações e metas de aporte de 10%. |
+| Interface | Streamlit |
+| LLM  | Ollama (local). |
+| Base de Conhecimento | Arquivos JSON/CSV mockados na pasta 'data'. |
 | Validação | Camada de lógica em Python para garantir que a IA não invente saldos (Anti-Alucinação) e respeite os limites de risco. |
 
 ---
@@ -64,12 +64,12 @@ flowchart TD
 
 ### Estratégias Adotadas
 
-- [ ] O Lumi consulta estritamente os dados do arquivo JSON para informar saldos e limites de gastos.
-- [ ] Respostas que envolvem cálculos (como os 10% de aporte) são processadas por funções Python para garantir precisão matemática.
-- [ ] O agente é instruído a admitir quando não possui uma informação na base de dados, evitando "chutes".
+- [x] O Lumi consulta estritamente os dados do arquivo JSON para informar saldos e limites de gastos.
+- [x] Respostas que envolvem cálculos (como os 10% de aporte) são processadas por funções Python para garantir precisão matemática.
+- [x] O agente é instruído a admitir quando não possui uma informação na base de dados, evitando "chutes".
 
 ### Limitações Declaradas
 > O que o agente NÃO faz?
 
 - Não realiza movimentações financeiras (TED, PIX ou pagamentos).
-- Não faz recomendações de ativos de risco sem análise de perfil.
+- Não faz recomendações de ativos de alto risco e sem análise de perfil.
