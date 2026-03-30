@@ -71,3 +71,20 @@ if st.button("Enviar") and user_input:
 
     st.session_state["messages"].append({"role": "assistant", "content": resposta})
     st.rerun()
+
+# --- Teste rápido do token Hugging Face ---
+import requests
+
+HF_API_TOKEN = st.secrets["HF_API_TOKEN"]
+test_response = requests.get(
+    "https://huggingface.co/api/whoami-v2",
+    headers={"Authorization": f"Bearer {HF_API_TOKEN}"}
+)
+
+st.subheader("🔑 Teste do Token Hugging Face")
+if test_response.status_code == 200:
+    st.success("✅ Token Hugging Face configurado corretamente!")
+    st.write(test_response.json())  # Mostra informações da sua conta Hugging Face
+else:
+    st.error("❌ Token inválido ou não configurado.")
+    st.write(test_response.text)
