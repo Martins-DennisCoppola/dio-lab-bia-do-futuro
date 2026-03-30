@@ -67,8 +67,21 @@ st.subheader("Comparação entre Produtos Financeiros")
 produtos_df = pd.DataFrame(produtos_financeiros).T
 st.dataframe(produtos_df)
 
-selecionados = st.multiselect("Escolha produtos para comparar:", produtos_df.index)
+# Filtrar produtos de acordo com perfil
+st.subheader("Produtos Recomendados para o Perfil")
+tolerancia_risco = perfil_investidor.get("tolerancia_risco", 3)
+prazo_maximo = perfil_investidor["preferencias"].get("prazo_maximo_dias", 365)
 
+# Filtragem simples: risco <= tolerancia e liquidez diária ou prazo aceitável
+recomendados = produtos_df[
+    (produtos_df["risco"] <= tolerancia_risco) &
+    ((produtos_df["liquidez"] == "diaria") | (produtos_df["liquidez"] == "prazo determinado"))
+]
+
+st.table(recomendados)
+
+# Comparação manual
+selecionados = st.multiselect("Escolha produtos para comparar:", produtos_df.index)
 if len(selecionados) > 0:
     comparacao = produtos_df.loc[selecionados]
     st.table(comparacao)
