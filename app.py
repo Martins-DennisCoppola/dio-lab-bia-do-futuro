@@ -1,133 +1,73 @@
-import os
 import streamlit as st
 import pandas as pd
 import json
-import matplotlib.pyplot as plt
+import requests
 
-st.title("Lumi - Wealth Guardian")
+# --- Configuração inicial ---
+st.set_page_config(page_title="Lumi - Agente Financeiro Inteligente", layout="wide")
+st.title("💡 Lumi - Agente Financeiro Inteligente")
 
-# --- Carregar dados ---
+# --- Carregar base de conhecimento ---
 transacoes = pd.read_csv("data/transacoes.csv")
-
 with open("data/perfil_investidor.json", "r", encoding="utf-8") as f:
     perfil_investidor = json.load(f)
-
 with open("data/produtos_financeiros.json", "r", encoding="utf-8") as f:
     produtos_financeiros = json.load(f)
-
 with open("data/conhecimento_mercado.json", "r", encoding="utf-8") as f:
     conhecimento_mercado = json.load(f)
 
-# --- Exibir dados ---
-st.subheader("Histórico de Transações")
-st.dataframe(transacoes)
+# --- Configuração Hugging Face ---
+HF_API_TOKEN = st.secrets["HF_API_TOKEN"]
+API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-v0.1"
 
-st.subheader("Perfil do Investidor")
-st.json(perfil_investidor)
+headers = {"Authorization": f"Bearer {HF_API_TOKEN}"}
 
-st.subheader("Produtos Financeiros")
-st.json(produtos_financeiros)
-
-# --- Gráfico de transações ---
-st.subheader("Gráfico de Transações")
-if "valor" in transacoes.columns and "data" in transacoes.columns:
-    transacoes["data"] = pd.to_datetime(transacoes["data"])
-    fig, ax = plt.subplots()
-    ax.plot(transacoes["data"], transacoes["valor"], marker="o")
-    ax.set_title("Evolução dos valores")
-    ax.set_xlabel("Data")
-    ax.set_ylabel("Valor (R$)")
-    st.pyplot(fig)
-
-# --- Estatísticas rápidas ---
-st.subheader("Estatísticas")
-if "tipo" in transacoes.columns:
-    entradas = transacoes[transacoes["tipo"] == "entrada"]["valor"].sum()
-    saidas = transacoes[transacoes["tipo"] == "saida"]["valor"].sum()
-    st.write("Valor total de entradas:", entradas)
-    st.write("Valor total de saídas:", saidas)
-    st.write("Saldo líquido:", entradas - saidas)
-
-# --- Análise por categoria ---
-st.subheader("Distribuição por Categoria")
-if "categoria" in transacoes.columns:
-    categoria_totais = transacoes.groupby("categoria")["valor"].sum()
-    st.bar_chart(categoria_totais)
-
-# --- Análise por tipo de pagamento ---
-st.subheader("Distribuição por Forma de Pagamento")
-if "pagamento" in transacoes.columns:
-    pagamento_totais = transacoes.groupby("pagamento")["valor"].sum()
-    st.bar_chart(pagamento_totais)
-
-# --- Comparação entre produtos financeiros ---
-st.subheader("Comparação entre Produtos Financeiros")
-produtos_df = pd.DataFrame(produtos_financeiros).T
-st.dataframe(produtos_df)
-
-# Filtrar produtos de acordo com perfil
-st.subheader("Produtos Recomendados para o Perfil")
-tolerancia_risco = perfil_investidor.get("tolerancia_risco", 3)
-prazo_maximo = perfil_investidor["preferencias"].get("prazo_maximo_dias", 365)
-
-recomendados = produtos_df[
-    (produtos_df["risco"] <= tolerancia_risco) &
-    ((produtos_df["liquidez"] == "diaria") | (produtos_df["liquidez"] == "prazo determinado"))
-]
-st.table(recomendados)
-
-# Comparação manual
-selecionados = st.multiselect("Escolha produtos para comparar:", produtos_df.index)
-if len(selecionados) > 0:
-    comparacao = produtos_df.loc[selecionados]
-    st.table(comparacao)
-
-    if "rentabilidade" in produtos_df.columns:
-        st.bar_chart(comparacao["rentabilidade"])
-
-    if "risco" in produtos_df.columns:
-        st.bar_chart(comparacao["risco"])
-
-# --- Interatividade ---
-st.subheader("Simulação de Investimento")
-valor = st.number_input("Digite o valor a investir:", min_value=0.0, step=100.0)
-produto = st.selectbox("Escolha um produto:", list(produtos_financeiros.keys()))
-
-if st.button("Simular"):
-    st.success(f"Você investiria R$ {valor:.2f} em {produto}.")
-
-# --- Conhecimento de Mercado ---
-st.subheader("Conhecimento de Mercado")
-
-# Campo de busca interativa
-busca = st.text_input("Digite um conceito para buscar (ex: Selic, CDI, inflação):")
-
-if busca:
-    conceito = busca.lower().strip()
-    if conceito in conhecimento_mercado:
-        detalhes = conhecimento_mercado[conceito]
-        st.markdown(f"### {conceito.capitalize()}")
-        st.write("**Definição:**", detalhes.get("definicao", ""))
-        st.write("**Exemplo:**", detalhes.get("exemplo", ""))
-        if "impacto_investidor" in detalhes:
-            st.info(f"Impacto para o investidor: {detalhes['impacto_investidor']}")
+def gerar_resposta(prompt):
+    payload = {"inputs": prompt, "parameters": {"max_new_tokens": 300}}
+    response = requests.post(API_URL, headers=headers, json=payload)
+    if response.status_code == 200:
+        return response.json()[0]["generated_text"]
     else:
-        st.warning("Conceito não encontrado. Tente outro termo.")
-else:
-    # Exibir todos os conceitos se nada for buscado
-    for conceito, detalhes in conhecimento_mercado.items():
-        st.markdown(f"### {conceito.capitalize()}")
-        st.write("**Definição:**", detalhes.get("definicao", ""))
-        st.write("**Exemplo:**", detalhes.get("exemplo", ""))
-        if "impacto_investidor" in detalhes:
-            st.info(f"Impacto para o investidor: {detalhes['impacto_investidor']}")
+        return "⚠️ Erro ao consultar modelo Hugging Face."
 
-# --- Comparação entre conceitos ---
-st.subheader("Comparação entre Conceitos de Mercado")
-conceitos_selecionados = st.multiselect("Escolha conceitos para comparar:", list(conhecimento_mercado.keys()))
+# --- System Prompt ---
+SYSTEM_PROMPT = """
+Você é Lumi, um agente financeiro inteligente e consultivo.
+Seu papel é:
+- Antecipar necessidades do cliente
+- Personalizar sugestões com base no perfil e transações
+- Cocriar soluções financeiras de forma clara e segura
+- Nunca inventar dados: use apenas a base de conhecimento fornecida
+- Se não souber, explique que não há informação disponível
+"""
 
-if len(conceitos_selecionados) > 1:
-    comparacao_conceitos = {}
-    for c in conceitos_selecionados:
-        comparacao_conceitos[c] = conhecimento_mercado[c]
-    st.json(comparacao_conceitos)
+# --- Histórico de chat ---
+if "messages" not in st.session_state:
+    st.session_state["messages"] = [{"role": "system", "content": SYSTEM_PROMPT}]
+
+# --- Interface de chat ---
+st.subheader("💬 Chat com Lumi")
+
+for msg in st.session_state["messages"]:
+    if msg["role"] == "user":
+        st.markdown(f"**Você:** {msg['content']}")
+    elif msg["role"] == "assistant":
+        st.markdown(f"**Lumi:** {msg['content']}")
+
+user_input = st.text_input("Digite sua pergunta ou solicitação:")
+
+if st.button("Enviar") and user_input:
+    st.session_state["messages"].append({"role": "user", "content": user_input})
+
+    contexto = f"""
+    Perfil do investidor: {perfil_investidor}
+    Produtos financeiros disponíveis: {produtos_financeiros}
+    Conhecimento de mercado: {conhecimento_mercado}
+    Histórico de transações: {transacoes.head(10).to_dict()}
+    """
+
+    prompt = SYSTEM_PROMPT + "\n\nContexto:\n" + contexto + "\n\nUsuário: " + user_input + "\nLumi:"
+    resposta = gerar_resposta(prompt)
+
+    st.session_state["messages"].append({"role": "assistant", "content": resposta})
+    st.experimental_rerun()
