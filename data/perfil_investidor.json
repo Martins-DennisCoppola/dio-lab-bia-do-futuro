@@ -2,10 +2,16 @@
   "nome": "Dennis",
   "perfil": "Moderado",
   "meta_aporte_mensal": 500,
-  "objetivo_longo_prazo": "Aposentadoria com renda passiva",
+  "objetivos": {
+    "curto_prazo": "Reserva de emergência",
+    "medio_prazo": "Compra de imóvel",
+    "longo_prazo": "Aposentadoria com renda passiva"
+  },
+  "tolerancia_risco": 2,
   "preferencias": {
     "liquidez": "diaria",
-    "aceita_prazo": "90 dias",
+    "prazo_maximo_dias": 90,
+    "prioriza_produtos": ["renda fixa", "baixo custo"],
     "evita_produtos": ["alto risco", "criptomoedas"]
   }
 }
