@@ -27,9 +27,6 @@ st.json(perfil_investidor)
 st.subheader("Produtos Financeiros")
 st.json(produtos_financeiros)
 
-st.subheader("Conhecimento de Mercado")
-st.json(conhecimento_mercado)
-
 # --- Gráfico de transações ---
 st.subheader("Gráfico de Transações")
 if "valor" in transacoes.columns and "data" in transacoes.columns:
@@ -72,12 +69,10 @@ st.subheader("Produtos Recomendados para o Perfil")
 tolerancia_risco = perfil_investidor.get("tolerancia_risco", 3)
 prazo_maximo = perfil_investidor["preferencias"].get("prazo_maximo_dias", 365)
 
-# Filtragem simples: risco <= tolerancia e liquidez diária ou prazo aceitável
 recomendados = produtos_df[
     (produtos_df["risco"] <= tolerancia_risco) &
     ((produtos_df["liquidez"] == "diaria") | (produtos_df["liquidez"] == "prazo determinado"))
 ]
-
 st.table(recomendados)
 
 # Comparação manual
@@ -99,3 +94,39 @@ produto = st.selectbox("Escolha um produto:", list(produtos_financeiros.keys()))
 
 if st.button("Simular"):
     st.success(f"Você investiria R$ {valor:.2f} em {produto}.")
+
+# --- Conhecimento de Mercado ---
+st.subheader("Conhecimento de Mercado")
+
+# Campo de busca interativa
+busca = st.text_input("Digite um conceito para buscar (ex: Selic, CDI, inflação):")
+
+if busca:
+    conceito = busca.lower().strip()
+    if conceito in conhecimento_mercado:
+        detalhes = conhecimento_mercado[conceito]
+        st.markdown(f"### {conceito.capitalize()}")
+        st.write("**Definição:**", detalhes.get("definicao", ""))
+        st.write("**Exemplo:**", detalhes.get("exemplo", ""))
+        if "impacto_investidor" in detalhes:
+            st.info(f"Impacto para o investidor: {detalhes['impacto_investidor']}")
+    else:
+        st.warning("Conceito não encontrado. Tente outro termo.")
+else:
+    # Exibir todos os conceitos se nada for buscado
+    for conceito, detalhes in conhecimento_mercado.items():
+        st.markdown(f"### {conceito.capitalize()}")
+        st.write("**Definição:**", detalhes.get("definicao", ""))
+        st.write("**Exemplo:**", detalhes.get("exemplo", ""))
+        if "impacto_investidor" in detalhes:
+            st.info(f"Impacto para o investidor: {detalhes['impacto_investidor']}")
+
+# --- Comparação entre conceitos ---
+st.subheader("Comparação entre Conceitos de Mercado")
+conceitos_selecionados = st.multiselect("Escolha conceitos para comparar:", list(conhecimento_mercado.keys()))
+
+if len(conceitos_selecionados) > 1:
+    comparacao_conceitos = {}
+    for c in conceitos_selecionados:
+        comparacao_conceitos[c] = conhecimento_mercado[c]
+    st.json(comparacao_conceitos)
