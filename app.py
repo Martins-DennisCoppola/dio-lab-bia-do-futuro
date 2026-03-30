@@ -6,13 +6,6 @@ import matplotlib.pyplot as plt
 
 st.title("Lumi - Wealth Guardian")
 
-# --- Depuração: verificar arquivos disponíveis ---
-st.write("Arquivos na raiz:", os.listdir('.'))
-if os.path.exists("Dados"):
-    st.write("Conteúdo da pasta Dados:", os.listdir("Dados"))
-else:
-    st.warning("A pasta 'Dados' não foi encontrada.")
-
 # --- Carregar dados ---
 transacoes = pd.read_csv("data/transacoes.csv")
 
