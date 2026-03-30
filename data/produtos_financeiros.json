@@ -1,26 +1,23 @@
-[
-  {
-    "nome": "Tesouro Selic",
+{
+  "Tesouro Selic": {
     "risco": "baixo",
     "rentabilidade": "Selic",
     "liquidez": "diaria",
     "restricao": "adequado para todos os perfis",
     "contexto_lumi": "Ideal para completar aporte mensal com segurança."
   },
-  {
-    "nome": "CDB Liquidez Diária",
+  "CDB Liquidez Diária": {
     "risco": "baixo",
     "rentabilidade": "102% CDI",
     "liquidez": "diaria",
     "restricao": "adequado para perfil moderado e conservador",
     "contexto_lumi": "Boa alternativa à poupança, com liquidez imediata."
   },
-  {
-    "nome": "Debêntures Incentivadas",
+  "Debêntures Incentivadas": {
     "risco": "moderado",
     "rentabilidade": "IPCA + 5% ao ano",
     "liquidez": "prazo determinado",
     "restricao": "adequado apenas para perfil moderado",
     "contexto_lumi": "Opção para diversificação com benefício fiscal."
   }
-]
+}
