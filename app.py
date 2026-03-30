@@ -36,17 +36,31 @@ if "valor" in transacoes.columns and "data" in transacoes.columns:
     transacoes["data"] = pd.to_datetime(transacoes["data"])
     fig, ax = plt.subplots()
     ax.plot(transacoes["data"], transacoes["valor"], marker="o")
-    ax.set_title("Evolução dos valores investidos")
+    ax.set_title("Evolução dos valores")
     ax.set_xlabel("Data")
     ax.set_ylabel("Valor (R$)")
     st.pyplot(fig)
 
 # --- Estatísticas rápidas ---
 st.subheader("Estatísticas")
-if "valor" in transacoes.columns:
-    st.write("Valor total investido:", transacoes["valor"].sum())
-    st.write("Média por transação:", transacoes["valor"].mean())
-    st.write("Maior transação:", transacoes["valor"].max())
+if "tipo" in transacoes.columns:
+    entradas = transacoes[transacoes["tipo"] == "entrada"]["valor"].sum()
+    saidas = transacoes[transacoes["tipo"] == "saida"]["valor"].sum()
+    st.write("Valor total de entradas:", entradas)
+    st.write("Valor total de saídas:", saidas)
+    st.write("Saldo líquido:", entradas - saidas)
+
+# --- Análise por categoria ---
+st.subheader("Distribuição por Categoria")
+if "categoria" in transacoes.columns:
+    categoria_totais = transacoes.groupby("categoria")["valor"].sum()
+    st.bar_chart(categoria_totais)
+
+# --- Análise por tipo de pagamento ---
+st.subheader("Distribuição por Forma de Pagamento")
+if "pagamento" in transacoes.columns:
+    pagamento_totais = transacoes.groupby("pagamento")["valor"].sum()
+    st.bar_chart(pagamento_totais)
 
 # --- Comparação entre produtos financeiros ---
 st.subheader("Comparação entre Produtos Financeiros")
