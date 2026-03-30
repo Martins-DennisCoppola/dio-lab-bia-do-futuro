@@ -70,4 +70,4 @@ if st.button("Enviar") and user_input:
     resposta = gerar_resposta(prompt)
 
     st.session_state["messages"].append({"role": "assistant", "content": resposta})
-    st.experimental_rerun()
+    st.rerun()
