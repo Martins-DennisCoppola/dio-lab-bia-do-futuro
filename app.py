@@ -14,7 +14,7 @@ else:
     st.warning("A pasta 'Dados' não foi encontrada.")
 
 # --- Carregar dados ---
-transacoes = pd.read_csv("Dados/transacoes.csv")
+transacoes = pd.read_csv("data/transacoes.csv")
 
 with open("data/perfil_investidor.json", "r", encoding="utf-8") as f:
     perfil_investidor = json.load(f)
