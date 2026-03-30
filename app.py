@@ -16,13 +16,13 @@ else:
 # --- Carregar dados ---
 transacoes = pd.read_csv("Dados/transacoes.csv")
 
-with open("Dados/perfil_investidor.json", "r", encoding="utf-8") as f:
+with open("data/perfil_investidor.json", "r", encoding="utf-8") as f:
     perfil_investidor = json.load(f)
 
-with open("Dados/produtos_financeiros.json", "r", encoding="utf-8") as f:
+with open("data/produtos_financeiros.json", "r", encoding="utf-8") as f:
     produtos_financeiros = json.load(f)
 
-with open("Dados/conhecimento_mercado.json", "r", encoding="utf-8") as f:
+with open("data/conhecimento_mercado.json", "r", encoding="utf-8") as f:
     conhecimento_mercado = json.load(f)
 
 # --- Exibir dados ---
