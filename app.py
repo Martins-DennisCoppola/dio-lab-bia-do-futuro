@@ -17,18 +17,20 @@ with open("data/conhecimento_mercado.json", "r", encoding="utf-8") as f:
     conhecimento_mercado = json.load(f)
 
 # --- Configuração Hugging Face ---
+# --- Configuração Hugging Face ---
 HF_API_TOKEN = st.secrets["HF_API_TOKEN"]
-API_URL = "https://api-inference.huggingface.co/models/mistralai/Mistral-7B-v0.1"
+API_URL = "https://api-inference.huggingface.co/models/facebook/blenderbot-400M-distill"
 
 headers = {"Authorization": f"Bearer {HF_API_TOKEN}"}
 
 def gerar_resposta(prompt):
-    payload = {"inputs": prompt, "parameters": {"max_new_tokens": 300}}
+    payload = {"inputs": prompt, "parameters": {"max_new_tokens": 200}}
     response = requests.post(API_URL, headers=headers, json=payload)
     if response.status_code == 200:
+        # O Blenderbot retorna um dicionário com 'generated_text'
         return response.json()[0]["generated_text"]
     else:
-        return "⚠️ Erro ao consultar modelo Hugging Face."
+        return f"⚠️ Erro ao consultar modelo Hugging Face: {response.status_code}"
 
 # --- System Prompt ---
 SYSTEM_PROMPT = """
