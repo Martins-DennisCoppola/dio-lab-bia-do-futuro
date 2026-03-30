@@ -1,22 +1,37 @@
 {
   "selic": {
-    "definicao": "Taxa básica de juros da economia brasileira.",
-    "exemplo": "Com Selic a 10% ao ano, um investimento de R$ 1.000 rende cerca de R$ 100 em 12 meses."
+    "definicao": "Taxa básica de juros da economia brasileira, usada como referência para o custo do crédito e rendimento da renda fixa.",
+    "exemplo": "Com Selic a 10% ao ano, um investimento de R$ 1.000 rende cerca de R$ 100 em 12 meses.",
+    "impacto_investidor": "Afeta diretamente a rentabilidade de títulos públicos e CDBs."
   },
   "juros_compostos": {
     "definicao": "Juros sobre juros, aumentando o rendimento ao longo do tempo.",
-    "exemplo": "Investindo R$ 500 a 1% ao mês, em 12 meses você terá R$ 566,97."
+    "exemplo": "Investindo R$ 500 a 1% ao mês, em 12 meses você terá R$ 566,97.",
+    "impacto_investidor": "Favorece quem mantém investimentos por prazos mais longos."
   },
   "cdi": {
-    "definicao": "Taxa usada como referência para investimentos de renda fixa.",
-    "exemplo": "Um CDB de 102% do CDI rende mais que a poupança."
+    "definicao": "Taxa usada como referência para investimentos de renda fixa no Brasil.",
+    "exemplo": "Um CDB de 102% do CDI rende mais que a poupança.",
+    "impacto_investidor": "Serve como parâmetro para comparar produtos de renda fixa."
   },
   "liquidez": {
     "definicao": "Capacidade de transformar um ativo em dinheiro rapidamente.",
-    "exemplo": "Tesouro Selic possui liquidez diária, ou seja, pode ser resgatado a qualquer momento."
+    "exemplo": "Tesouro Selic possui liquidez diária, ou seja, pode ser resgatado a qualquer momento.",
+    "impacto_investidor": "Produtos com liquidez diária são ideais para reserva de emergência."
   },
   "diversificacao": {
     "definicao": "Estratégia de distribuir investimentos em diferentes ativos para reduzir riscos.",
-    "exemplo": "Combinar Tesouro Selic com CDBs e Fundos de Índice aumenta a segurança da carteira."
+    "exemplo": "Combinar Tesouro Selic com CDBs e Fundos de Índice aumenta a segurança da carteira.",
+    "impacto_investidor": "Reduz a exposição a perdas em cenários adversos."
+  },
+  "inflacao": {
+    "definicao": "Aumento generalizado dos preços de bens e serviços ao longo do tempo.",
+    "exemplo": "Com inflação de 5% ao ano, R$ 100 hoje terão poder de compra equivalente a R$ 95 no próximo ano.",
+    "impacto_investidor": "Afeta o poder de compra e exige investimentos que superem a inflação."
+  },
+  "cambio": {
+    "definicao": "Taxa de conversão entre moedas, como real e dólar.",
+    "exemplo": "Se o dólar sobe de R$ 5,00 para R$ 5,50, viagens internacionais ficam mais caras.",
+    "impacto_investidor": "Afeta investimentos em ativos internacionais e empresas exportadoras."
   }
 }
