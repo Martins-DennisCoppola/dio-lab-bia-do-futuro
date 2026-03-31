@@ -2,7 +2,7 @@
 
 ## Dados Utilizados
 
-| Arquivo | Formato | Utilização no Agente |
+| Arquivo | Formato | Para que serve no Lumi |
 |---------|---------|----------------------|
 | `conhecimento_mercado.json` | JSON | Fornece a base técnica sobre Selic, Juros Compostos, CDI, liquidez e diversificação (enriquecido via Hugging Face). |
 | `historico_atendimento.csv` | CSV | Mantém a continuidade da jornada financeira, progresso das metas e agora inclui o campo **sentimento** para ajustar o tom de voz. |
