@@ -13,11 +13,67 @@
     "restricao": "adequado para perfil moderado e conservador",
     "contexto_lumi": "Boa alternativa à poupança, com liquidez imediata."
   },
+  "CDB Bradesco": {
+    "risco": 2,
+    "rentabilidade": 12.0,
+    "liquidez": "diaria",
+    "restricao": "adequado para perfil conservador e moderado",
+    "contexto_lumi": "Emitido por banco de grande porte, oferece segurança e liquidez imediata, mas com taxas menores que bancos médios."
+  },
+  "Tesouro Prefixado": {
+    "risco": 1,
+    "rentabilidade": 12.0,
+    "liquidez": "prazo determinado",
+    "restricao": "adequado para perfil conservador e moderado",
+    "contexto_lumi": "Bom para travar taxa de juros em cenário de queda da Selic."
+  },
+  "Tesouro IPCA+": {
+    "risco": 1,
+    "rentabilidade": 6.0,
+    "liquidez": "prazo determinado",
+    "restricao": "adequado para todos os perfis",
+    "contexto_lumi": "Protege contra inflação e garante ganho real."
+  },
+  "LCI/LCA": {
+    "risco": 2,
+    "rentabilidade": 11.0,
+    "liquidez": "prazo determinado",
+    "restricao": "adequado para perfil conservador",
+    "contexto_lumi": "Isento de IR, indicado para quem busca segurança e diversificação."
+  },
+  "Fundo DI": {
+    "risco": 1,
+    "rentabilidade": 10.5,
+    "liquidez": "D+1",
+    "restricao": "adequado para perfil conservador",
+    "contexto_lumi": "Alternativa simples para acompanhar CDI com liquidez rápida."
+  },
   "Debêntures Incentivadas": {
     "risco": 3,
     "rentabilidade": 15.0,
     "liquidez": "prazo determinado",
     "restricao": "adequado apenas para perfil moderado",
     "contexto_lumi": "Opção para diversificação com benefício fiscal."
+  },
+  "Fundo Imobiliário": {
+    "risco": 4,
+    "rentabilidade": 9.0,
+    "liquidez": "bolsa de valores",
+    "restricao": "adequado para perfil moderado e agressivo",
+    "contexto_lumi": "Permite investir em imóveis de forma acessível, com distribuição mensal de rendimentos."
+  },
+  "Criptomoedas": {
+    "risco": 5,
+    "rentabilidade": "volátil",
+    "liquidez": "alta",
+    "restricao": "não recomendado para perfis conservadores e moderados",
+    "contexto_lumi": "Investimento de alto risco e alta volatilidade, não indicado para este desafio."
+  },
+  "Ações": {
+    "risco": 4,
+    "rentabilidade": "variável",
+    "liquidez": "bolsa de valores",
+    "restricao": "não recomendado para perfis conservadores",
+    "contexto_lumi": "Podem gerar bons retornos, mas não fazem parte da proposta de renda fixa segura."
   }
 }
