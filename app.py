@@ -1,76 +1,142 @@
-import streamlit as st
-import pandas as pd
 import json
+import pandas as pd 
 import requests
+import streamlit as st
 
-# --- Configuração inicial ---
-st.set_page_config(page_title="Lumi - Agente Financeiro Inteligente", layout="wide")
-st.title("💡 Lumi - Agente Financeiro Inteligente")
+# === CONFIG UI === #
+st.set_page_config(page_title="Lumi", layout="centered")
 
-# --- Carregar base de conhecimento ---
-transacoes = pd.read_csv("data/transacoes.csv")
-with open("data/perfil_investidor.json", "r", encoding="utf-8") as f:
-    perfil_investidor = json.load(f)
-with open("data/produtos_financeiros.json", "r", encoding="utf-8") as f:
-    produtos_financeiros = json.load(f)
-with open("data/conhecimento_mercado.json", "r", encoding="utf-8") as f:
-    conhecimento_mercado = json.load(f)
+st.title("💡 Lumi, está na área !!!")
+st.markdown("Seu agente inteligente que ajudar a organizar a sua vida financeira.")
 
-# --- Configuração Hugging Face ---
-# --- Configuração Hugging Face ---
-HF_API_TOKEN = st.secrets["HF_API_TOKEN"]
-API_URL = "https://api-inference.huggingface.co/models/google/flan-t5-base"
+# === MENSAGEM INICIAL === #
+if "inicio" not in st.session_state:
+    st.session_state.inicio = True
+    st.chat_message("assistant").write(
+        "Olá! 👋 Como posso te ajudar hoje?"
+    )
 
-headers = {"Authorization": f"Bearer {HF_API_TOKEN}"}
+# === MEMÓRIA === #
+if "messages" not in st.session_state:
+    st.session_state.messages = []
 
-def gerar_resposta(prompt):
-    payload = {"inputs": prompt, "parameters": {"max_new_tokens": 200}}
-    response = requests.post(API_URL, headers=headers, json=payload)
-    if response.status_code == 200:
-        # O Blenderbot retorna um dicionário com 'generated_text'
-        return response.json()[0]["generated_text"]
-    else:
-        return f"⚠️ Erro ao consultar modelo Hugging Face: {response.status_code}"
+# === MOSTRAR HISTÓRICO === #
+for msg in st.session_state.messages:
+    st.chat_message(msg["role"]).write(msg["content"])
 
-# --- System Prompt ---
-SYSTEM_PROMPT = """
-Você é Lumi, um agente financeiro inteligente e consultivo.
-Seu papel é:
-- Antecipar necessidades do cliente
-- Personalizar sugestões com base no perfil e transações
-- Cocriar soluções financeiras de forma clara e segura
-- Nunca inventar dados: use apenas a base de conhecimento fornecida
-- Se não souber, explique que não há informação disponível
+# === CONFIGURAÇÃO === #
+OLLAMA_URL = "http://localhost:11434/api/generate"
+MODELO = "phi3:mini"
+
+# === CARREGAR DADOS === #
+@st.cache_data
+def carregar_dados():
+    perfil = json.load(open('./data/perfil_investidor.json'))
+    transacoes = pd.read_csv('./data/transacoes.csv')
+    historico = pd.read_csv('./data/historico_atendimento.csv')
+    produtos = json.load(open('./data/produtos_financeiros.json'))
+    return perfil, transacoes, historico, produtos
+
+perfil, transacoes, historico, produtos = carregar_dados()
+
+# === CONTEXTO === #
+@st.cache_data
+def montar_contexto(perfil, transacoes, historico, produtos):
+    return f"""
+CLIENTE: {perfil['nome']}, {perfil['idade']} anos, perfil {perfil['perfil_investidor']}
+OBJETIVO: {perfil['objetivo_principal']}
+PATRIMÔNIO: R$ {perfil['patrimonio_total']} 
+
+TRANSAÇÕES RECENTES:
+{transacoes.tail(3).to_dict(orient="records")}
+
+ATENDIMENTOS ANTERIORES:
+{historico.tail(2).to_dict(orient="records")}
+
+PRODUTOS DISPONÍVEIS:
+{list(produtos.keys())}
 """
 
-# --- Histórico de chat ---
-if "messages" not in st.session_state:
-    st.session_state["messages"] = [{"role": "system", "content": SYSTEM_PROMPT}]
+contexto = montar_contexto(perfil, transacoes, historico, produtos)
 
-# --- Interface de chat ---
-st.subheader("💬 Chat com Lumi")
+# === SYSTEM PROMPT === #
+SYSTEM_PROMPT = """Você é Lumi, assistente financeiro.
 
-for msg in st.session_state["messages"]:
-    if msg["role"] == "user":
-        st.markdown(f"**Você:** {msg['content']}")
-    elif msg["role"] == "assistant":
-        st.markdown(f"**Lumi:** {msg['content']}")
+Objetivo: garantir aporte mensal de R$500 (10%) para dobrar a renda passiva.
 
-user_input = st.text_input("Digite sua pergunta ou solicitação:")
+Regras:
+- Use os dados fornecidos para personalizar respostas;
+- Pode usar conhecimento geral de finanças para orientar;
+- Nunca invente dados do cliente;
+- Se faltar informação do cliente, diga e dê orientação geral;
+- Priorize gastos essenciais (Aluguel, Energia, Gás);
+- Só valide lazer após confirmar aporte;
+- Perfil moderado → evitar alto risco;
+- Responda apenas sobre finanças;
+- Seja direto (máx 3 parágrafos curtos).
+"""
 
-if st.button("Enviar") and user_input:
-    st.session_state["messages"].append({"role": "user", "content": user_input})
+# === FUNÇÃO SAUDAÇÃO === #
+def eh_saudacao(msg):
+    saudacoes = ["oi", "olá", "ola", "bom dia", "boa tarde", "boa noite"]
+    msg = msg.lower()
+    return any(s in msg for s in saudacoes)
 
-    contexto = f"""
-    Perfil do investidor: {perfil_investidor}
-    Produtos financeiros disponíveis: {produtos_financeiros}
-    Conhecimento de mercado: {conhecimento_mercado}
-    Histórico de transações: {transacoes.head(10).to_dict()}
-    """
+# === FUNÇÃO PERGUNTAR (COM MEMÓRIA) === #
+def perguntar(msg):
+    historico_texto = ""
 
-    prompt = SYSTEM_PROMPT + "\n\nContexto:\n" + contexto + "\n\nUsuário: " + user_input + "\nLumi:"
-    resposta = gerar_resposta(prompt)
+    for m in st.session_state.messages:
+        if m["role"] == "user":
+            historico_texto += f"Usuário: {m['content']}\n"
+        else:
+            historico_texto += f"Lumi: {m['content']}\n"
 
-    st.session_state["messages"].append({"role": "assistant", "content": resposta})
-    st.rerun()
+    prompt = f"""
+    {SYSTEM_PROMPT}
 
+    CONTEXTO DO CLIENTE:
+    {contexto}
+
+    HISTÓRICO DA CONVERSA:
+    {historico_texto}
+
+    Usuário: {msg}
+    Lumi:"""
+
+    r = requests.post(
+        OLLAMA_URL,
+        json={
+            "model": MODELO,
+            "prompt": prompt,
+            "stream": False,
+            "options": {
+                "num_predict": 120,
+                "temperature": 0.2,
+                "top_k": 40
+            }
+        }
+    )
+
+    return r.json()["response"]
+
+# === INPUT DO USUÁRIO === #
+if user_input := st.chat_input("Sua dúvida sobre finanças...", key="input_principal"):
+    
+    # salvar user
+    st.session_state.messages.append({"role": "user", "content": user_input})
+    st.chat_message("user").write(user_input)
+
+    # resposta
+    if eh_saudacao(user_input):
+        resposta = "Olá! 👋 Em que posso te ajudar hoje com suas finanças?"
+    else:
+        with st.spinner("Pensando..."):
+            resposta = perguntar(user_input)
+
+    # salvar resposta
+    st.session_state.messages.append({"role": "assistant", "content": resposta})
+    st.chat_message("assistant").write(resposta)
+
+    # limitar memória (performance)
+    st.session_state.messages = st.session_state.messages[-6:]
