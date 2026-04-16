@@ -1,11 +1,13 @@
 data,descricao,categoria,valor,tipo,pagamento
-2026-03-01,Salário Mensal,receita,5000.00,entrada,transferencia
-2026-03-02,Aluguel e Condomínio,moradia,1500.00,saida,debito
-2026-03-03,Energia,moradia,250.00,saida,debito
-2026-03-04,Gás,moradia,85.00,saida,debito
-2026-03-05,Alimentação,alimentacao,600.00,saida,cartao
-2026-03-06,Aporte Tesouro Selic,investimento,350.00,saida,transferencia
-2026-03-10,Freelance Projeto Dados,receita,800.00,entrada,pix
-2026-03-12,Curso Online,educacao,200.00,saida,cartao
-2026-03-15,Lazer Restaurante,lazer,180.00,saida,cartao
-2026-03-20,Seguro Saúde,seguros,300.00,saida,debito
+2026-04-01,Salario Mensal,receita,5000.00,entrada,transferencia
+2026-04-02,Aluguel e Condominio,moradia,1500.00,saida,debito
+2026-04-03,Energia,moradia,250.00,saida,debito
+2026-04-04,Gas,moradia,85.00,saida,debito
+2026-04-05,Alimentacao,alimentacao,600.00,saida,cartao
+2026-04-06,Aporte Tesouro Selic,investimento,350.00,saida,transferencia
+2026-04-10,Freelance Projeto Dados,receita,800.00,entrada,pix
+2026-04-12,Curso Online,educacao,200.00,saida,cartao
+2026-04-15,Lazer Restaurante,lazer,180.00,saida,cartao
+2026-04-18,Seguro Saude,seguros,300.00,saida,debito
+2026-04-20,Transporte por Aplicativo,transporte,120.00,saida,pix
+2026-04-22,Farmacia,saude,90.00,saida,cartao
