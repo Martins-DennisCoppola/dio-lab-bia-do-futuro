@@ -1,6 +1,8 @@
 data,interacao,resposta,sentimento
-2026-02-15,"Posso gastar R$200 em lazer?","Recomendo priorizar aporte de 10%.","neutro"
-2026-02-20,"Completei o aporte de R$500.","Parabéns, você atingiu sua meta!","positivo"
-2026-02-25,"Quero investir em Bitcoin.","Não recomendado para perfil moderado.","negativo"
-2026-03-01,"Não consegui completar o aporte este mês.","Sugiro ajustar gastos de lazer para priorizar o aporte.","neutro"
-2026-03-05,"Quanto falta para minha meta?","Faltam R$150 para completar os R$500.","positivo"
+2026-04-02,"Posso gastar R$ 200 em lazer este mês?","Antes de aumentar os gastos com lazer, recomendo priorizar o aporte mensal de R$ 500.","neutro"
+2026-04-05,"Completei o aporte de R$ 500.","Parabéns, você atingiu sua meta mensal de aporte. Isso fortalece sua disciplina financeira.","positivo"
+2026-04-08,"Quero investir em Bitcoin.","Para o seu perfil moderado, não recomendo concentrar recursos em criptomoedas. Prefira opções mais estáveis.","negativo"
+2026-04-10,"Não consegui completar o aporte este mês.","Tudo bem. Podemos revisar gastos não essenciais e montar um plano para recuperar o valor no próximo mês.","neutro"
+2026-04-12,"Quanto falta para minha meta de aporte?","Faltam R$ 150 para completar sua meta mensal de R$ 500.","positivo"
+2026-04-14,"Qual investimento combina mais com minha reserva de emergência?","Para sua necessidade de liquidez, Tesouro Selic e CDB com liquidez diária são as opções mais adequadas.","positivo"
+2026-04-15,"Posso reduzir meu aporte este mês?","Pode, mas isso atrasa sua meta de formação de patrimônio. O ideal é manter consistência sempre que possível.","neutro"
