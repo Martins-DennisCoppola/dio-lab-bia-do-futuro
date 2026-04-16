@@ -1,17 +1,29 @@
 {
   "nome": "Dennis",
-  "perfil": "Moderado",
-  "meta_aporte_mensal": 500,
-  "objetivos": {
-    "curto_prazo": "Reserva de emergência",
-    "medio_prazo": "Compra de imóvel",
-    "longo_prazo": "Aposentadoria com renda passiva"
-  },
+  "idade": 36,
+  "profissao": "Analista de Dados",
+  "renda_mensal": 5000.0,
+  "perfil_investidor": "Moderado",
+  "meta_aporte_mensal": 500.0,
+  "objetivo_principal": "Aposentadoria com renda passiva",
+  "patrimonio_total": 15000.0,
   "tolerancia_risco": 2,
+  "objetivos": {
+    "curto_prazo": "Construir reserva de emergência",
+    "medio_prazo": "Organizar os aportes mensais com consistência",
+    "longo_prazo": "Alcançar independência financeira com renda passiva"
+  },
   "preferencias": {
     "liquidez": "diaria",
     "prazo_maximo_dias": 90,
-    "prioriza_produtos": ["renda fixa", "baixo custo"],
-    "evita_produtos": ["alto risco", "criptomoedas"]
+    "prioriza_produtos": [
+      "renda fixa",
+      "baixo custo",
+      "liquidez diaria"
+    ],
+    "evita_produtos": [
+      "alto risco",
+      "criptomoedas"
+    ]
   }
 }
