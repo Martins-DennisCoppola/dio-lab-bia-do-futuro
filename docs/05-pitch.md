@@ -1,8 +1,5 @@
 # Pitch (3 minutos)
 
-> [!TIP]
-> Você pode usar alguns slides para apoiar o pitch e mostrar a solução funcionando na prática.
-
 ## Roteiro
 
 ### 1. O Problema (30 seg)
@@ -49,10 +46,6 @@ O impacto da solução está em tornar a educação financeira mais acessível n
 ---
 
 ## Link do Vídeo
-
-> Cole aqui o link do seu pitch (YouTube, Loom, Google Drive, etc.)
-
-[Link do vídeo]
 
 > Cole aqui o link do seu pitch (YouTube, Loom, Google Drive, etc.)
 
