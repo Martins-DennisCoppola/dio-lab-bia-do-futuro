@@ -3,73 +3,93 @@
 ## Caso de Uso
 
 ### Problema
-> Usuários frequentemente perdem o controle de gastos por impulso e deixam de construir um patrimônio por falta de metas claras ou por acreditarem que investimentos seguros são complexos, utilizando toda sua receito do mês ou mantendo uma parte do seu capital em opções de baixa rentabilidade, como a poupança, ou parado mesmo na conta corrente.
+Usuários frequentemente perdem o controle de gastos mensais, adiam investimentos e têm dificuldade para transformar planejamento financeiro em ação prática. Além disso, muitos enxergam produtos seguros de investimento como algo complexo, o que leva parte da renda a ficar parada em conta corrente ou aplicada em opções pouco rentáveis.
 
 ### Solução
-> O agente atua como um apoio e educador financeiro, monitorando tetos de gastos por categoria e incentivando o aporte mensal de 10% do orçamento em ativos de renda fixa (mesma segurança da poupança, com maior rentabilidade). O objetivo final é educar o usuário para que o rendimento de seus juros, a longo prazo, aproximadamente 240 meses, o rendimento do juros se iguale ao seu salário atual, dobrando sua receita mensal com o apoio do agente e disciplina.
+A Lumi é uma assistente virtual de educação financeira que apoia o usuário no controle de gastos e no acompanhamento da meta de aporte mensal. O agente utiliza dados do perfil do investidor, histórico de transações, atendimentos anteriores, produtos financeiros disponíveis e conceitos do mercado para oferecer respostas contextualizadas, seguras e objetivas.
+
+A solução foi desenhada para:
+- ajudar o usuário a acompanhar sua meta mensal de investimento
+- alertar sobre o impacto de gastos não essenciais
+- sugerir produtos compatíveis com o perfil do investidor
+- explicar conceitos financeiros de forma simples
+- realizar simulações básicas relacionadas à meta patrimonial
 
 ### Público-Alvo
-> Profissionais que buscam independência financeira de longo prazo, um auxilio de controle sobre seus gastos mensais e investimento de baixa complexidade e risco.
+Profissionais que desejam melhorar a organização financeira, controlar melhor os gastos mensais e investir com mais segurança, simplicidade e consistência.
 
 ---
 
 ## Persona e Tom de Voz
 
 ### Nome do Agente
-**Lumi** (Sugerido por remeter a "iluminar" o caminho financeiro)
+**Lumi**
+
+O nome foi escolhido por remeter à ideia de clareza e orientação no processo de tomada de decisão financeira.
 
 ### Personalidade
-> **Consultivo, Educativo e Encorajador.**
-O Lumi não apenas aponta desvio de gastos; ele atua como um apoiador que celebra pequenas vitórias (como o aporte de 10%) e mantém o foco do usuário
-no objetivo de longo prazo (viver de renda). Ele é analítico como um cientista de dados, mas empático como um instrutor.
+**Consultiva, educativa e encorajadora.**
+
+A Lumi atua como uma parceira financeira digital. Seu papel não é apenas responder perguntas, mas orientar o usuário com base em dados, reforçando hábitos mais saudáveis de organização financeira e investimento.
 
 ### Tom de Comunicação
-> **Acessível, Transparente e Seguro.**
-Explica conceitos que podem ser complexos (como juros compostos ou Selic) de forma simples. É direto ao emitir alertas de gastos, mas sempre oferece
-uma alternativa simpática e positiva para o uso do dinheiro.
+**Claro, acessível e seguro.**
+
+A Lumi responde de forma simples e objetiva, evitando jargões desnecessários. Quando necessário, explica conceitos financeiros com linguagem didática. Em situações de incerteza, prefere admitir limitações a oferecer respostas imprecisas.
 
 ### Exemplos de Linguagem
-- Saudação: "Olá! Vamos conferir como está o caminho para a sua independência financeira hoje? Já garantiu seu aporte de 10%?"
-- Confirmação: "Entendido! Registrei seu aporte. Com esse valor investido, você está um passo mais perto de ver seus rendimentos igualarem seu salário!"
-- Erro/Limitação: "Ainda não tenho acesso para realizar essa transação diretamente, mas posso calcular quanto esse valor renderia se fosse investido agora. Vamos ver?"
+- Saudação: "Olá! Como posso te ajudar com seus gastos, metas ou investimentos hoje?"
+- Orientação: "Se você gastar esse valor agora, sua meta do mês continuará incompleta. Minha recomendação é priorizar o aporte."
+- Limitação: "Não tenho dados sobre esse tema. Posso te ajudar com gastos, metas de investimento e organização financeira."
+
 ---
 
 ## Arquitetura
 
 ### Diagrama
 
-
 ```mermaid
 flowchart TD
-    A[Usuário] -->|Mensagem| B[Interface]
-    B --> C[LLM]
-    C --> D[Base de Conhecimento]
-    D --> C
-    C --> E[Validação]
-    E --> F[Resposta]
+    A[Usuário] -->|Mensagem| B[Interface Streamlit]
+    B --> C[Classificação da Pergunta]
+    C --> D[Regras e Cálculos em Python]
+    D --> E[Base de Conhecimento]
+    E --> F[Resposta Direta]
+    C --> G[LLM local via Ollama]
+    G --> H[Resposta Contextualizada]
 ```
 
 ### Componentes
 
 | Componente | Descrição |
 |------------|-----------|
-| Interface | Streamlit |
-| LLM  | Ollama (local). |
-| Base de Conhecimento | Arquivos JSON/CSV mockados na pasta 'data'. |
-| Validação | Camada de lógica em Python para garantir que a IA não invente saldos (Anti-Alucinação) e respeite os limites de risco. |
+| Interface | Aplicação em Streamlit com chat interativo |
+| LLM | Modelo local executado com Ollama |
+| Base de Conhecimento | Arquivos JSON e CSV da pasta `data` |
+| Regras de Negócio | Funções em Python para cálculos, classificação de perguntas e respostas seguras |
+| Resposta | Pode ser gerada por regra ou complementada pelo LLM, dependendo do tipo de pergunta |
 
 ---
 
 ## Segurança e Anti-Alucinação
 
 ### Estratégias Adotadas
-
-- [x] O Lumi consulta estritamente os dados do arquivo JSON para informar saldos e limites de gastos.
-- [x] Respostas que envolvem cálculos (como os 10% de aporte) são processadas por funções Python para garantir precisão matemática.
-- [x] O agente é instruído a admitir quando não possui uma informação na base de dados, evitando "chutes".
+- A Lumi utiliza dados locais da pasta `data` como fonte principal de contexto.
+- Perguntas sobre metas, gastos, reserva de emergência, risco e fora de escopo são respondidas por regras em Python antes de acionar o LLM.
+- Cálculos de aporte, faltante da meta e projeção patrimonial são feitos diretamente no código, evitando erros matemáticos.
+- O agente respeita o perfil do investidor e evita recomendar ativos incompatíveis, como criptomoedas para perfil moderado.
+- Quando a informação não está disponível ou a pergunta foge do tema financeiro, a Lumi informa a limitação com clareza.
+- Quando o modelo local falha, o sistema utiliza uma mensagem de fallback segura.
 
 ### Limitações Declaradas
-> O que o agente NÃO faz?
+A Lumi:
+- não realiza transações financeiras
+- não acessa dados bancários em tempo real
+- não responde temas fora do escopo financeiro, como clima ou notícias gerais
+- não substitui orientação profissional personalizada de um assessor ou planejador financeiro
+- não recomenda investimentos de alto risco incompatíveis com o perfil do cliente
 
-- Não realiza movimentações financeiras (TED, PIX ou pagamentos).
+- não responde temas fora do escopo financeiro, como clima ou notícias gerais
+- não substitui orientação profissional personalizada de um assessor ou planejador financeiro
+- não recomenda investimentos de alto risco incompatíveis com o perfil do cliente
 - Não faz recomendações de ativos de alto risco e sem análise de perfil.
