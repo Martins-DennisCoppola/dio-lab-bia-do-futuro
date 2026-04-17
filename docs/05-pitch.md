@@ -26,7 +26,7 @@ Na demonstração, posso mostrar quatro situações principais:
 - **Cenário 2:** o usuário pergunta onde investir a reserva de emergência. A Lumi recomenda Tesouro Selic ou CDB com liquidez diária, respeitando o perfil moderado.
 - **Cenário 3:** o usuário pergunta o que é Selic. A Lumi usa a base de conhecimento para explicar o conceito de forma simples.
 - **Cenário 4:** o usuário faz uma pergunta fora do escopo, como clima. A Lumi reconhece a limitação e redireciona a conversa para temas financeiros.
-- **Cenário 5:** o usuário pergunta dados sigilosos, como senha. A Lumi responde
+- **Cenário 5:** o usuário pergunta dados sigilosos, como senha. A Lumi responde não ter acesso a senhas, dados bancários ou informações pessoais sensíveis. 
 
 ### 4. Diferencial e Impacto (30 seg)
 O diferencial da Lumi está em unir três pontos importantes:
