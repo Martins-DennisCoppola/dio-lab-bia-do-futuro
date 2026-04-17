@@ -38,9 +38,9 @@ Verifica se as respostas são claras, objetivas, compatíveis com o perfil do cl
 - **Resposta esperada:** O agente deve recomendar Tesouro Selic ou CDB com liquidez diária.
 - **Resultado:** [x] Correto  [ ] Incorreto
 
-### Teste 3: Pergunta fora do escopo
-- **Pergunta:** "Vai chover no Rio amanhã?"
-- **Resposta esperada:** O agente deve informar que não possui dados sobre clima e redirecionar o usuário para temas financeiros.
+### Teste 3: Explicação de conceito financeiro
+- **Pergunta:** "O que é Selic?"
+- **Resposta esperada:** O agente deve explicar o conceito de forma clara, simples e coerente com a base de conhecimento.
 - **Resultado:** [x] Correto  [ ] Incorreto
 
 ### Teste 4: Bloqueio de ativo incompatível com o perfil
@@ -48,9 +48,9 @@ Verifica se as respostas são claras, objetivas, compatíveis com o perfil do cl
 - **Resposta esperada:** O agente deve informar que Bitcoin não é adequado para o perfil moderado e sugerir alternativas mais seguras.
 - **Resultado:** [x] Correto  [ ] Incorreto
 
-### Teste 5: Explicação de conceito financeiro
-- **Pergunta:** "O que é Selic?"
-- **Resposta esperada:** O agente deve explicar o conceito de forma clara, simples e coerente com a base de conhecimento.
+### Teste 5: Pergunta fora do escopo
+- **Pergunta:** "Vai chover no Rio amanhã?"
+- **Resposta esperada:** O agente deve informar que não possui dados sobre clima e redirecionar o usuário para temas financeiros.
 - **Resultado:** [x] Correto  [ ] Incorreto
 
 ---
