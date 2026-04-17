@@ -1,39 +1,42 @@
 # Pitch (3 minutos)
 
 > [!TIP]
-> Você pode usar alguns slides pra apoiar no seu Pitch e mostrar sua solução na prática.
- 
+> Você pode usar alguns slides para apoiar o pitch e mostrar a solução funcionando na prática.
+
 ## Roteiro
 
 ### 1. O Problema (30 seg)
-> Qual dor do cliente você resolve?
+Usuários frequentemente têm dificuldade para controlar gastos mensais, manter consistência nos investimentos e entender quais produtos financeiros fazem sentido para o seu perfil.
 
-1. Usuários frequentemente perdem o controle de gastos por impulso e deixam de construir patrimônio por falta de metas claras.  
-2. Muitos acreditam que investimentos seguros são complexos e acabam deixando dinheiro parado na conta corrente ou em opções de baixa rentabilidade, como a poupança.  
+Além disso, muitos deixam de investir por falta de clareza, planejamento ou por acreditarem que investimentos seguros são difíceis de entender.
 
 ### 2. A Solução (1 min)
-> Como seu agente resolve esse problema?
+O **Lumi** é uma assistente virtual de educação financeira criada para ajudar o usuário a organizar melhor sua vida financeira.
 
-1. O **Lumi** é um agente financeiro inteligente que atua como **Guardião de Patrimônio**.  
-2. Ele monitora gastos reais, incentiva aportes mensais de 10% e recomenda produtos de renda fixa com maior rentabilidade e segurança.  
-3. Com disciplina e dados, o Lumi ajuda o usuário a dobrar sua renda passiva no longo prazo, conectando cada decisão financeira aos objetivos pessoais (como aposentadoria ou compra de imóvel).  
+A solução combina:
+- análise de transações do mês
+- acompanhamento da meta de aporte
+- explicação de conceitos financeiros
+- sugestão de produtos compatíveis com o perfil do investidor
+- respostas seguras com base em regras e dados locais
+
+Na prática, a Lumi consulta arquivos de perfil, transações, histórico de atendimento, produtos financeiros e conhecimento de mercado para gerar respostas personalizadas e objetivas.
 
 ### 3. Demonstração (1 min)
+Na demonstração, posso mostrar quatro situações principais:
 
-> - **Cenário 1:** O usuário pergunta se pode gastar R$ 80 em lazer. O Lumi verifica transações, identifica que falta aporte e recomenda priorizar Tesouro Selic.  
-> - **Cenário 2:** O usuário quer saber onde investir R$ 150 restantes. O Lumi sugere CDB Liquidez Diária, respeitando perfil moderado e preferência de liquidez.  
-> - **Cenário 3:** O usuário pergunta sobre aposentadoria. O Lumi projeta que aportes mensais de R$ 500,00 levam a R$ 600.000,00 em cerca de 25 anos, garantindo renda passiva próxima ao salário atual.  
+- **Cenário 1:** o usuário pergunta se pode gastar mais dinheiro no mês. A Lumi analisa o aporte atual, informa quanto falta para a meta e orienta priorizar o investimento.
+- **Cenário 2:** o usuário pergunta onde investir a reserva de emergência. A Lumi recomenda Tesouro Selic ou CDB com liquidez diária, respeitando o perfil moderado.
+- **Cenário 3:** o usuário pergunta o que é Selic. A Lumi usa a base de conhecimento para explicar o conceito de forma simples.
+- **Cenário 4:** o usuário faz uma pergunta fora do escopo, como clima. A Lumi reconhece a limitação e redireciona a conversa para temas financeiros.
 
 ### 4. Diferencial e Impacto (30 seg)
-> Por que essa solução é inovadora e qual é o impacto dela na sociedade?
+O diferencial da Lumi está em unir três pontos importantes:
+- personalização com base em dados do cliente
+- segurança contra alucinações, usando regras antes do LLM
+- experiência simples, clara e funcional
 
- O Lumi não é apenas um chatbot: é um **estrategista financeiro digital**.  
-> Diferenciais:  
- - Personalização avançada (perfil, liquidez, objetivos de longo prazo).  
- - Segurança contra alucinações e bloqueio de ativos de alto risco.  
- - Contexto local (Rio de Janeiro) para análises mais próximas da realidade.  
- - Feedback adaptativo: ajusta tom de voz conforme sentimento registrado.  
- - Impacto: educação financeira prática, disciplina nos aportes e construção de patrimônio sólido para independência financeira.  
+O impacto da solução está em tornar a educação financeira mais acessível na prática, ajudando o usuário a tomar decisões melhores sobre gastos, metas e investimentos.
 
 ## Checklist do Pitch
 
@@ -46,6 +49,10 @@
 ---
 
 ## Link do Vídeo
+
+> Cole aqui o link do seu pitch (YouTube, Loom, Google Drive, etc.)
+
+[Link do vídeo]
 
 > Cole aqui o link do seu pitch (YouTube, Loom, Google Drive, etc.)
 
