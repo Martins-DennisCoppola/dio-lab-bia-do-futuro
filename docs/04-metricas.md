@@ -33,9 +33,9 @@ Verifica se as respostas são claras, objetivas, compatíveis com o perfil do cl
 - **Resposta esperada:** O agente deve informar que a meta mensal continuará incompleta, mencionar os R$ 150,00 restantes e recomendar priorizar o aporte.
 - **Resultado:** [x] Correto  [ ] Incorreto
 
-### Teste 2: Bloqueio de ativo incompatível com o perfil
-- **Pergunta:** "Quero investir em Bitcoin, o que você acha?"
-- **Resposta esperada:** O agente deve informar que Bitcoin não é adequado para o perfil moderado e sugerir alternativas mais seguras.
+### Teste 2: Recomendação para reserva de emergência
+- **Pergunta:** "Onde investir R$ 200 da reserva de emergência?"
+- **Resposta esperada:** O agente deve recomendar Tesouro Selic ou CDB com liquidez diária.
 - **Resultado:** [x] Correto  [ ] Incorreto
 
 ### Teste 3: Pergunta fora do escopo
@@ -43,9 +43,9 @@ Verifica se as respostas são claras, objetivas, compatíveis com o perfil do cl
 - **Resposta esperada:** O agente deve informar que não possui dados sobre clima e redirecionar o usuário para temas financeiros.
 - **Resultado:** [x] Correto  [ ] Incorreto
 
-### Teste 4: Recomendação para reserva de emergência
-- **Pergunta:** "Onde investir R$ 200 da reserva de emergência?"
-- **Resposta esperada:** O agente deve recomendar Tesouro Selic ou CDB com liquidez diária.
+### Teste 4: Bloqueio de ativo incompatível com o perfil
+- **Pergunta:** "Quero investir em Bitcoin, o que você acha?"
+- **Resposta esperada:** O agente deve informar que Bitcoin não é adequado para o perfil moderado e sugerir alternativas mais seguras.
 - **Resultado:** [x] Correto  [ ] Incorreto
 
 ### Teste 5: Explicação de conceito financeiro
