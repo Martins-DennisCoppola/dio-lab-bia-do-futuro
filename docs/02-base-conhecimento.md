@@ -2,63 +2,88 @@
 
 ## Dados Utilizados
 
-| Arquivo | Formato | Para que serve no Lumi |
-|---------|---------|----------------------|
-| `conhecimento_mercado.json` | JSON | Fornece a base técnica sobre Selic, Juros Compostos, CDI, liquidez e diversificação (enriquecido via Hugging Face). |
-| `historico_atendimento.csv` | CSV | Mantém a continuidade da jornada financeira, progresso das metas e agora inclui o campo **sentimento** para ajustar o tom de voz. |
-| `perfil_investidor.json` | JSON | Define a meta de 10% de aporte mensal, perfil moderado do Dennis, além de **objetivo_longo_prazo** e **preferencias** (liquidez, prazo, restrições). |
-| `produtos_financeiros.json` | JSON | Catálogo de investimentos com curadoria para a estratégia de dobrar a renda, incluindo campos de **liquidez** e **restricao** por perfil. |
-| `transacoes.csv` | CSV | Registro de gastos reais (Energia, Gás, Alimentação, Educação, Seguros) e receitas extras, com campo adicional de **forma de pagamento**. |
+| Arquivo | Formato | Função no projeto |
+|---------|---------|-------------------|
+| `conhecimento_mercado.json` | JSON | Base conceitual para explicar termos como Selic, CDI, liquidez, juros compostos, reserva de emergência e risco. |
+| `historico_atendimento.csv` | CSV | Registra interações anteriores do cliente, ajudando a manter continuidade e contexto no atendimento. |
+| `perfil_investidor.json` | JSON | Define o perfil do cliente, meta de aporte mensal, objetivo principal, patrimônio atual e preferências de investimento. |
+| `produtos_financeiros.json` | JSON | Catálogo de produtos financeiros com informações de risco, liquidez, categoria, restrição e contexto de recomendação. |
+| `transacoes.csv` | CSV | Histórico de receitas, gastos e aportes do cliente, usado para cálculos financeiros e análise do mês atual. |
 
 ---
 
 ## Adaptações nos Dados
 
-> Os dados originais foram expandidos para incluir a "Regra de Ouro dos 10%" e novos campos de contexto.
+Os dados mockados foram adaptados para tornar a Lumi mais coerente com o caso de uso proposto no projeto.
 
-**Categorização Semântica:** Substituímos nomes de estabelecimentos por categorias puras (Energia, Gás, Alimentação, Educação, Seguros) para facilitar a análise da IA.  
-
-**Camada de Contexto:** Adicionamos o campo **contexto_lumi** no JSON de produtos, permitindo que a IA explique o "porquê" de cada recomendação para o perfil do Dennis.  
-
-**Feedback e Sentimento:** O histórico de atendimento agora registra o sentimento (positivo, neutro, negativo), permitindo que o Lumi ajuste o tom de voz.  
-
-**Objetivos e Preferências:** O perfil do investidor inclui objetivos de longo prazo (ex.: aposentadoria) e preferências de liquidez/prazo, garantindo recomendações personalizadas.  
-
-**Remoção de Ruído:** Optamos por não incluir gastos complexos como veículos próprios, focando na eficiência do transporte por aplicativo/público.  
+### Principais ajustes realizados
+- O arquivo `conhecimento_mercado.json` foi ampliado com conceitos mais úteis para a experiência do agente, como reserva de emergência, renda fixa, Tesouro Selic, CDB, perfil moderado, risco e rentabilidade.
+- O arquivo `historico_atendimento.csv` passou a incluir o campo `sentimento`, permitindo registrar o tom das interações anteriores.
+- O arquivo `perfil_investidor.json` foi enriquecido com informações como renda mensal, patrimônio total, objetivo principal, nível de tolerância ao risco e preferências de liquidez.
+- O arquivo `produtos_financeiros.json` recebeu campos como `categoria`, `indicado_para` e `contexto_lumi`, para facilitar explicações mais personalizadas.
+- O arquivo `transacoes.csv` foi organizado com categorias claras de receitas, gastos e investimentos, permitindo simulações simples e análise de comportamento financeiro.
 
 ---
 
 ## Estratégia de Integração
 
-### Como os dados são carregados?
-> Os arquivos JSON e CSV localizados na pasta /data são processados via scripts Python (utilizando a biblioteca pandas para os CSVs e json para os perfis) e convertidos em blocos de texto estruturado no início de cada sessão.  
-> Agora, os scripts também validam consistência dos novos campos (ex.: liquidez, forma de pagamento, sentimento).
+### Como os dados são carregados
+Os arquivos JSON e CSV da pasta `data` são carregados no início da aplicação. Os arquivos CSV são tratados com `pandas`, enquanto os arquivos JSON são lidos com a biblioteca `json`.
 
-### Como os dados são usados no prompt?
-> Os arquivos são transformados em contexto textual para o LLM, permitindo que o Lumi:  
-- Calcule sobras de caixa e aporte necessário.  
-- Ajuste recomendações conforme liquidez e perfil.  
-- Adapte comunicação conforme sentimento registrado.  
-- Conecte decisões financeiras aos objetivos de longo prazo.  
+Além do carregamento, o sistema realiza validações básicas para garantir que os arquivos possuem as colunas esperadas antes de iniciar o atendimento.
+
+### Como os dados são usados
+A base de conhecimento é usada de duas formas:
+
+1. **Regras e cálculos em Python**
+- cálculo do aporte realizado no mês
+- cálculo de receitas e gastos do mês
+- cálculo do valor faltante para a meta mensal
+- projeção simples de tempo para atingir a meta patrimonial
+- resposta direta para perguntas sobre gasto, meta, reserva, risco e fora de escopo
+
+2. **Contexto para o LLM**
+- perfil do investidor
+- histórico resumido de atendimento
+- resumo dos produtos financeiros
+- conceitos do mercado financeiro
+
+Dessa forma, a Lumi não depende exclusivamente do modelo de linguagem para responder perguntas importantes, reduzindo o risco de alucinação.
 
 ---
 
 ## Exemplo de Contexto Montado
 
-> DADOS DO ESTRATEGISTA:  
-- Nome: Dennis (Analista de Dados)  
-- Meta Mensal: R$ 500,00 (10% do salário)  
-- Aporte Realizado: R$ 350,00  
-- Objetivo de Longo Prazo: Aposentadoria com renda passiva  
-- Preferência: Liquidez diária, evita ativos de alto risco  
+### Perfil do Cliente
+- Nome: Dennis
+- Profissão: Analista de Dados
+- Perfil do investidor: Moderado
+- Renda mensal: R$ 5.000,00
+- Patrimônio atual: R$ 15.000,00
+- Meta de aporte mensal: R$ 500,00
+- Objetivo principal: Aposentadoria com renda passiva
 
-> ANÁLISE DE FLUXO (MARÇO/2026):  
-- Moradia (Aluguel/Energia/Gás): R$ 1.835,00  
-- Lazer Atual: R$ 235,90  
-- Educação: R$ 200,00  
-- Seguros: R$ 300,00  
-- Status: Faltam R$ 150,00 para bater a meta de 10%.  
+### Situação Financeira do Mês
+- Aporte realizado: R$ 350,00
+- Valor faltante para a meta: R$ 150,00
+- Gastos com lazer: R$ 180,00
+- Receitas no mês: calculadas a partir do `transacoes.csv`
+- Gastos no mês: calculados a partir do `transacoes.csv`
 
-> CONHECIMENTO DISPONÍVEL:  
-- Recomendação: Tesouro Selic (Baixo risco, liquidez diária, ideal para completar o aporte).  
-- Observação: Última interação registrada como **positiva**, ajustar comunicação para tom encorajador.  
+### Conhecimento Disponível
+- Conceitos financeiros como Selic, liquidez, CDI, juros compostos e reserva de emergência
+- Produtos como Tesouro Selic, CDB com liquidez diária, Tesouro IPCA+ e outros
+- Histórico de interações anteriores para dar continuidade ao atendimento
+
+---
+
+## Papel da Base de Conhecimento na Lumi
+
+A base de conhecimento permite que a Lumi:
+- personalize respostas com base no perfil do cliente
+- explique conceitos financeiros com clareza
+- recomende produtos compatíveis com o perfil moderado
+- simule impactos de gastos e investimentos
+- mantenha consistência e segurança nas respostas
+
+Essa estrutura torna o agente mais confiável, contextualizado e aderente ao objetivo do projeto.
