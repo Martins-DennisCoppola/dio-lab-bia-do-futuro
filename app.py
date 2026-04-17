@@ -288,6 +288,9 @@ def classificar_pergunta(msg, base_conhecimento, produtos_dict):
     if any(p in texto for p in ["chover", "clima", "temperatura", "previsao do tempo"]):
         return "fora_escopo"
 
+    if any(p in texto for p in ["senha", "cpf", "documento", "conta bancaria", "dados bancarios", "cartao", "chave pix"]):
+        return "seguranca"
+
     if any(p in texto for p in ["gastar", "gasto", "comprar", "compra", "ifood", "lazer"]):
         return "gasto"
 
@@ -428,7 +431,7 @@ if user_input := st.chat_input("Digite sua dúvida financeira..."):
 
         impacto = 0
         if meses_sem_gasto is not None and meses_com_gasto is not None:
-                impacto = meses_com_gasto - meses_sem_gasto
+            impacto = meses_com_gasto - meses_sem_gasto
 
         if faltante > 0:
             resposta = (
@@ -470,7 +473,6 @@ if user_input := st.chat_input("Digite sua dúvida financeira..."):
             "O mais seguro é priorizar alternativas como Tesouro Selic e CDB com liquidez diária."
         )
 
-
     elif tipo == "conceito":
         conceito, dados = buscar_conceito(user_input, conhecimento_mercado)
         resposta = (
@@ -498,6 +500,11 @@ if user_input := st.chat_input("Digite sua dúvida financeira..."):
             "Não tenho essa informação. Posso te ajudar com seus gastos, metas de investimento e organização financeira."
         )
 
+    elif tipo == "seguranca":
+        resposta = (
+            "Não tenho acesso a senhas, dados bancários sigilosos ou informações pessoais sensíveis. "
+            "Posso te ajudar com organização financeira, metas e investimentos."
+        )
 
     else:
         resposta = perguntar_llm(
@@ -520,7 +527,7 @@ if user_input := st.chat_input("Digite sua dúvida financeira..."):
 
     st.session_state.messages.append({"role": "user", "content": user_input})
     st.session_state.messages.append({"role": "assistant", "content": resposta})
-    st.session_state.messages = st.session_state.messages[-8:]
+    st.session_state.messages = st.session_state.messages[-14:]
 
 for msg in st.session_state.messages:
     with st.chat_message(msg["role"]):
