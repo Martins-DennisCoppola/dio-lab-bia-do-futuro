@@ -48,6 +48,5 @@ O impacto da solução está em tornar a educação financeira mais acessível n
 
 ## Link do Vídeo
 
-> Cole aqui o link do seu pitch (YouTube, Loom, Google Drive, etc.)
+> (https://youtu.be/PrjWfNH3dZs)
 
-[Link do vídeo]
